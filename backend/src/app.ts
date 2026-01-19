@@ -3,6 +3,7 @@ import cors from "@fastify/cors";
 import cookie from "@fastify/cookie";
 import dotenv from "dotenv";
 import prismaPlugin from "./plugins/prisma.js";
+import { authRoutes } from "./modules/auth/auth.routes.js";
 
 // Dotenv
 dotenv.config();
@@ -22,8 +23,9 @@ app.register(cors, {
 app.register(cookie);
 app.register(prismaPlugin);
 
-//test route 
+//test route
 app.get("/health", async () => {
   return { status: "ok" };
 });
-
+// Auth routes
+app.register(authRoutes, { prefix: "/api/auth" });
