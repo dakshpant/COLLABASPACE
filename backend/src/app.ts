@@ -2,6 +2,7 @@ import fastify from "fastify";
 import cors from "@fastify/cors";
 import cookie from "@fastify/cookie";
 import dotenv from "dotenv";
+import prismaPlugin from "./plugins/prisma.js";
 
 // Dotenv
 dotenv.config();
@@ -19,3 +20,10 @@ app.register(cors, {
 
 //Cookie config
 app.register(cookie);
+app.register(prismaPlugin);
+
+//test route 
+app.get("/health", async () => {
+  return { status: "ok" };
+});
+
